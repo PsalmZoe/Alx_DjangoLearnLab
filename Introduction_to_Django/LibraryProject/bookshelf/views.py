@@ -7,7 +7,7 @@ from bookshelf.models import Book
 book = Book.objects.create(title="1984", author="George Orwell", publication_year=1949)
 book  # Expected Output: <Book: 1984 by George Orwell (1949)>
 
-# retrieve.md
+# read.md
 book = Book.objects.get(title="1984")
 book.title  # Expected Output: '1984'
 book.author  # Expected Output: 'George Orwell'
