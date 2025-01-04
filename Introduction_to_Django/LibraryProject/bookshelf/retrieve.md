@@ -1,4 +1,4 @@
-# read.md
+# retrieve.md
 book = Book.objects.get(title="1984")
 book.title  # Expected Output: '1984'
 book.author  # Expected Output: 'George Orwell'
