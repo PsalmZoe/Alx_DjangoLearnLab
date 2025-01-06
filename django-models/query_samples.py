@@ -23,3 +23,4 @@ def librarian_of_library(library_name):
         return library.librarian
     except (Library.DoesNotExist, Librarian.DoesNotExist):
         return None
+Librarian.objects.get(library=
