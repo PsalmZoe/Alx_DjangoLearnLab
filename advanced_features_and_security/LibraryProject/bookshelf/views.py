@@ -28,6 +28,12 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import permission_required
 from .models import Article
 
+@permission_required('books.can_view', raise_exception=True)
+def book_list(request):
+    # Fetch all books from the database
+    books = Book.objects.all()
+    return render(request, 'book_list.html', {'books': books})
+
 @permission_required('articles.can_view', raise_exception=True)
 def view_article(request, article_id):
     article = get_object_or_404(Article, id=article_id)
