@@ -44,4 +44,3 @@ urlpatterns = [
     # Register
     path('register/', UserRegisterView.as_view(), name='register'),
 ]
-views.register
