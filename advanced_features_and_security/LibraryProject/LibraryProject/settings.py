@@ -148,3 +148,6 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Enable the browser's XSS filter to help prevent cross-site scripting attacks
 SECURE_BROWSER_XSS_FILTER = True
+
+# If your app is behind a reverse proxy (like Nginx or Apache), configure Django to recognize the HTTPS connections.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
