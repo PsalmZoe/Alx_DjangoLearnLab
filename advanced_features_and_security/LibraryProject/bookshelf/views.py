@@ -53,3 +53,18 @@ def create_article(request):
         # Handle form submission and create the article
         pass
     return render(request, 'create_article.html')
+
+from django.shortcuts import render, redirect
+from .forms import ExampleForm
+
+def create_book(request):
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            form.save()  # This will securely save the data to the database
+            return redirect('book_list')  # Redirect to the book list after successful creation
+    else:
+        form = ExampleForm()
+
+    return render(request, 'bookshelf/form_example.html', {'form': form})
+
