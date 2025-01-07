@@ -14,7 +14,7 @@ class BookApiTests(APITestCase):
         self.book = Book.objects.create(title="Test Book", publication_year=2020, author=self.author)
         
         # Create a user and authenticate
-        self.user = User.objects.create_user(username="testuser", password="testpassword")
+        self.client.login(username="testuser", password="testpassword")
         self.token = Token.objects.create(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
