@@ -1,10 +1,13 @@
 from django import forms
+from .models import Book
 
-class BookForm(forms.Form):
-    title = forms.CharField(max_length=255)
-    author = forms.CharField(max_length=255)
+class ExampleForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title', 'author']
 
+    # You can add additional custom validation if needed
     def clean_title(self):
         title = self.cleaned_data['title']
-        # Perform custom validation if necessary
+        # You could add custom title validation here, like checking length or disallowing certain words.
         return title
