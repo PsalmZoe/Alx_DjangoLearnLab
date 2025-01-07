@@ -39,7 +39,7 @@ class BookDeleteView(generics.DestroyAPIView):
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filter_backends = (filters.DjangoFilterBackend, SearchFilter, OrderingFilter, filters.OrderingFilter)
+    filter_backends = (filters.DjangoFilterBackend, SearchFilter, OrderingFilter, filters.OrderingFilter, filters.SearchFilter)
     filter_fields = ['title', 'author', 'publication_year']
     search_fields = ['title', 'author']
     ordering_fields = ['title', 'publication_year']
