@@ -124,10 +124,27 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'  # Prevents your site from being embedded in an iframe, protecting against clickjacking.
-SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevents browsers from interpreting files as a different MIME type.
-CSRF_COOKIE_SECURE = True  # CSRF cookie will only be sent over HTTPS.
-SESSION_COOKIE_SECURE = True  # Session cookie will only be sent over HTTPS.
+
 SECURE_SSL_REDIRECT = True  # Redirects HTTP requests to HTTPS
 ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
+
+# Ensure that all requests are redirected to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS) settings to instruct browsers to only use HTTPS
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+# Ensure session cookies are only sent over HTTPS
+SESSION_COOKIE_SECURE = True
+
+# Ensure CSRF cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True
+# Prevent the site from being framed (protection against clickjacking)
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent browsers from MIME-sniffing a response away from the declared content-type
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable the browser's XSS filter to help prevent cross-site scripting attacks
+SECURE_BROWSER_XSS_FILTER = True
