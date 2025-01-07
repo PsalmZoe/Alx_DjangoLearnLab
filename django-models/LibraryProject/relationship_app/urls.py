@@ -32,7 +32,7 @@ urlpatterns = [
 
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from .views import UserRegisterView  # Import the custom registration view if defined
+from .views import UserRegisterView  # Import the register view
 
 urlpatterns = [
     # Login
@@ -44,3 +44,4 @@ urlpatterns = [
     # Register
     path('register/', UserRegisterView.as_view(), name='register'),
 ]
+
