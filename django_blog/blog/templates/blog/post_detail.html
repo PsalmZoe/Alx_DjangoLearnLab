@@ -7,7 +7,29 @@
   <p>By: {{ post.author.username }}</p>
 
   {% if user == post.author %}
-    <a href="{% url 'post-edit' pk=post.pk %}">Edit</a> | 
+    <a href="{% url 'post-update' pk=post.pk %}">Edit</a>
     <a href="{% url 'post-delete' pk=post.pk %}">Delete</a>
   {% endif %}
 {% endblock %}
+
+{% for comment in post.comments.all %}
+    <div>
+        <p>{{ comment.author.username }} says:</p>
+        <p>{{ comment.content }}</p>
+        {% if comment.author == user %}
+            <a href="{% url 'edit-comment' pk=comment.pk %}">Edit</a>
+            <a href="{% url 'delete-comment' pk=comment.pk %}">Delete</a>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% if user.is_authenticated %}
+    <h2>Post a Comment</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% else %}
+    <p>Please log in to leave a comment.</p>
+{% endif %}
