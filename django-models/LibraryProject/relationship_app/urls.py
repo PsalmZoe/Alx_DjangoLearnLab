@@ -27,7 +27,14 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Path for adding a book
     path('add-book/', views.add_book, name='add_book'),
+
+    # Path for editing a book
     path('edit-book/<int:pk>/', views.edit_book, name='edit_book'),
+
+    # Path for deleting a book
     path('delete-book/<int:pk>/', views.delete_book, name='delete_book'),
+
+    # Other URLs can go here
 ]
