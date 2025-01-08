@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>Blog Posts</h1>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a> - 
+        {{ post.published_date }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
