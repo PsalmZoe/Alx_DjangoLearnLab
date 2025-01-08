@@ -37,3 +37,12 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('tags/<str:tag_name>/', views.posts_by_tag, name='posts_by_tag'),  # Tag filtering URL
 ]
+
+# blog/urls.py
+from django.urls import path
+from .views import PostByTagListView
+
+urlpatterns = [
+    # Other URLs...
+    path('tags/<slug:tag_slug>/', PostByTagListView.as_view(), name='post_by_tag'),
+]

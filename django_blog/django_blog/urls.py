@@ -22,12 +22,4 @@ urlpatterns = [
     path('', include('blog.urls')),
 ]
 
-# blog/urls.py
-from django.urls import path
-from .views import PostByTagListView
-
-urlpatterns = [
-    # Other URLs...
-    path('tags/<slug:tag_slug>/', PostByTagListView.as_view(), name='post_by_tag'),
-]
 
