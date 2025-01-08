@@ -43,3 +43,12 @@ class PostForm(forms.ModelForm):
 # blog/forms.py
 class SearchForm(forms.Form):
     query = forms.CharField(max_length=100)
+
+# blog/forms.py
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'tags']  # The 'tags' field is now managed by django-taggit
