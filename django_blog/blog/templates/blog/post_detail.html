@@ -33,3 +33,14 @@
 {% else %}
     <p>Please log in to leave a comment.</p>
 {% endif %}
+
+<!-- blog/templates/blog/post_detail.html -->
+<h2>{{ post.title }}</h2>
+<p>{{ post.content }}</p>
+
+<h3>Tags:</h3>
+<ul>
+  {% for tag in post.tags.all %}
+    <li><a href="{% url 'posts_by_tag' tag.name %}">{{ tag.name }}</a></li>
+  {% endfor %}
+</ul>

@@ -26,3 +26,14 @@ urlpatterns = [
     path('comment/<int:pk>/update/', views.CommentUpdateView.as_view(), name='edit-comment'),
     path('comment/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='delete-comment'),
 ]
+
+# blog/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.PostListView.as_view(), name='post-list'),
+    path('post/<int:pk>/', views.PostDetailView.as_view(), name='post-detail'),
+    path('search/', views.search, name='search'),
+    path('tags/<str:tag_name>/', views.posts_by_tag, name='posts_by_tag'),  # Tag filtering URL
+]

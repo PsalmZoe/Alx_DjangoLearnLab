@@ -175,3 +175,25 @@ class CommentDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('post-detail', kwargs={'pk': self.object.post.pk})
+
+# blog/views.py
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Post, Tag
+from .forms import PostForm
+
+def search(request):
+    query = request.GET.get('q', '')
+    posts = Post.objects.filter(
+        Q(title__icontains=query) | 
+        Q(content__icontains=query) | 
+        Q(tags__name__icontains=query)
+    ).distinct()  # Get distinct posts that match query
+    
+    return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})
+
+# blog/views.py
+def posts_by_tag(request, tag_name):
+    tag = Tag.objects.get(name=tag_name)
+    posts = Post.objects.filter(tags=tag)
+    return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag})

@@ -24,3 +24,22 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
+
+# blog/forms.py
+from django import forms
+from .models import Post, Tag
+
+class PostForm(forms.ModelForm):
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'tags']
+
+# blog/forms.py
+class SearchForm(forms.Form):
+    query = forms.CharField(max_length=100)
