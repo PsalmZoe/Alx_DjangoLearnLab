@@ -4,6 +4,10 @@ from django.views.generic import DetailView
 from .models import Library
 from .models import Book, Library
 from django.views.generic.detail import DetailView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 # Function-based view to list all books
 def list_books(request):
@@ -34,3 +38,15 @@ from django.shortcuts import render
 def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
+
+# Custom registration view
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('book-list')  # Redirect after registration
+    else:
+        form = UserCreationForm()
+    return render(request, 'relationship_app/register.html', {'form': form})
