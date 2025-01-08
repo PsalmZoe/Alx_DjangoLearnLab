@@ -38,3 +38,6 @@ urlpatterns = [
 
     # Other URLs can go here
 ]
+
+add-book /
+edit-book/
