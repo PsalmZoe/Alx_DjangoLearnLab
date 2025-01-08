@@ -28,16 +28,13 @@ from . import views
 
 urlpatterns = [
     # Path for adding a book
-    path('add-book/', views.add_book, name='add_book'),
+    path('add_book/', views.add_book, name='add_book'),
 
     # Path for editing a book
-    path('edit-book/<int:pk>/', views.edit_book, name='edit_book'),
+    path('edit_book/<int:pk>/', views.edit_book, name='edit_book'),
 
     # Path for deleting a book
-    path('delete-book/<int:pk>/', views.delete_book, name='delete_book'),
+    path('delete_book/<int:pk>/', views.delete_book, name='delete_book'),
 
     # Other URLs can go here
 ]
-
-add-book /
-edit-book/
