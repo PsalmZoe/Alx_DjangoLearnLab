@@ -52,3 +52,15 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'tags']  # The 'tags' field is now managed by django-taggit
+
+from django import forms
+from taggit.forms import TagWidget
+from .models import Post
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'tags']
+        widgets = {
+            'tags': TagWidget(),  # Use TagWidget to enhance the tags input
+        }
