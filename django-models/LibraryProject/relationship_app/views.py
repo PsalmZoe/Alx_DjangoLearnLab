@@ -46,7 +46,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('book-list')  # Redirect after registration
+            return redirect('login')  # Redirect to login page after registration
     else:
         form = UserCreationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
