@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from .models import CustomUser
 from .serializers import UserSerializer
-from .serializers import RegisterSerializer
+from .serializers import UserRegistrationSerializer
 
 class RegisterView(APIView):
     permission_classes = [AllowAny]
