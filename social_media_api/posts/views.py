@@ -54,3 +54,5 @@ class FeedViewSet(viewsets.ReadOnlyModelViewSet):
         # Get posts from the users the current user is following
         followed_users = user.following.all()
         return Post.objects.filter(author__in=followed_users).order_by('-created_at')
+
+Post.objects.filter(author__in=following_users).order_by
