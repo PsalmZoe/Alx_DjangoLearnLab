@@ -7,6 +7,9 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from notifications.models import Notification
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+from rest_framework import status, permissions
+from rest_framework.decorators import api_view
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -106,3 +109,34 @@ class UnlikePostAPIView(APIView):
 
         except Like.DoesNotExist:
             return Response({'detail': 'You have not liked this post yet.'}, status=status.HTTP_400_BAD_REQUEST)
+
+# posts/views.py
+
+@api_view(['POST'])
+def like_post(request, pk):
+    # Get the post object or return a 404 error if not found
+    post = get_object_or_404(Post, pk=pk)
+
+    # Create or get the Like object for the current user and post
+    like, created = Like.objects.get_or_create(user=request.user, post=post)
+
+    if created:
+        # If the like is created, return a success response
+        return Response({"message": "Post liked successfully"}, status=status.HTTP_201_CREATED)
+    else:
+        # If the like already exists, return a response indicating the like already exists
+        return Response({"message": "You have already liked this post"}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def unlike_post(request, pk):
+    # Get the post object or return a 404 error if not found
+    post = get_object_or_404(Post, pk=pk)
+
+    try:
+        # Try to find the existing Like object
+        like = Like.objects.get(user=request.user, post=post)
+        like.delete()  # Delete the like if it exists
+        return Response({"message": "Post unliked successfully"}, status=status.HTTP_204_NO_CONTENT)
+    except Like.DoesNotExist:
+        # If the like does not exist, return an error response
+        return Response({"message": "You have not liked this post yet"}, status=status.HTTP_400_BAD_REQUEST)
