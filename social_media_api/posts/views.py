@@ -130,7 +130,7 @@ def like_post(request, pk):
 @api_view(['POST'])
 def unlike_post(request, pk):
     # Get the post object or return a 404 error if not found
-    post = get_object_or_404(Post, pk=pk)
+    post = generics.get_object_or_404(Post, pk=pk)
 
     try:
         # Try to find the existing Like object
