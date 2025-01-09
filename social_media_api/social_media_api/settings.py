@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jc#7#v70-sj-7%io8x!!^-@g%4y^z753ue53m7a09*ie%v2-dk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'social_media_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'postgresql',
         'USER': 'postgres',
         'PASSWORD': 'psalmz0e',
         'HOST': '127.0.0.1',
