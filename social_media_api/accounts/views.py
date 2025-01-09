@@ -68,6 +68,3 @@ class UnfollowUserView(APIView):
 
         user.following.remove(user_to_unfollow)
         return Response({"detail": "Unfollowed user successfully."}, status=status.HTTP_200_OK)
-
-generics.GenericAPIView
-CustomUser.objects.all()

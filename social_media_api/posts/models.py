@@ -25,9 +25,17 @@ class Comment(models.Model):
 
 User = get_user_model()
 
+from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 class Like(models.Model):
     user = models.ForeignKey(User, related_name="likes", on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, related_name="likes", on_delete=models.CASCADE)
+
+    # Use a string reference for the Post model to avoid circular imports
+    post = models.ForeignKey('Post', related_name="likes", on_delete=models.CASCADE)
+    
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
