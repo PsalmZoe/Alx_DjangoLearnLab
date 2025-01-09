@@ -13,14 +13,15 @@ class RegisterView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        data = request.data
-        user = CustomUser.objects.create_user(
-            username=data['username'],
-            email=data['email'],
-            password=data['password']
-        )
-        token = Token.objects.create(user=user)
-        return Response({'token': token.key})
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response({
+                "message": "User registered successfully.",
+                "username": user.username,
+                "email": user.email
+            })
+        return Response(serializer.errors, status=400)
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
